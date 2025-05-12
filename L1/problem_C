@@ -1,0 +1,28 @@
+n1 = input()
+n2 = input()
+n3 = input()
+n4 = input()
+bad = ['-', '(', ')', '+']
+S = []
+Sf = []
+S.append(n1)
+S.append(n2)
+S.append(n3)
+S.append(n4)
+for f in S:
+    nf = ''
+    for i in f:
+        if i in bad:
+            continue
+        if i not in bad:
+            nf += i
+    if len(nf) == 11:
+        nf = nf[1:]
+    if len(nf) == 7:
+        nf = '495' +nf
+    Sf.append(nf)
+for j in Sf[1:4]:
+    if Sf[0] == j:
+        print('YES')
+    else:
+        print('NO')
