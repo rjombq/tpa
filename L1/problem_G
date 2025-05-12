@@ -1,0 +1,7 @@
+n, k, m = map(int, input().split())
+x=k%m
+p=k-x
+if p==0:
+    print(0)
+else:
+    print(((n-x)//p)*(p//m))
