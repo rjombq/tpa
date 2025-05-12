@@ -1,0 +1,9 @@
+a, b, c, d = map(int, input().split())
+S = {
+    (max(a, c) * (b + d)): (max(a, c), (b + d)),
+    (max(a, d) * (b + c)): (max(a, d), (b + c)),
+    (max(b, c) * (a + d)): (max(b, c), (a + d)),
+    (max(b, d) * (a + c)): (max(b, d), (a + c)),
+}
+l = S.get(min((max(a, c) * (b + d)), (max(a, d) * (b + c)), (max(b, c) * (a + d)), (max(b, d) * (a + c))))
+print(*l)
