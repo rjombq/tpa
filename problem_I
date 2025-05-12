@@ -1,0 +1,14 @@
+a = int(input())
+b = int(input())
+c = int(input())
+d = int(input())
+e = int(input())
+
+l_min = min(a, b, c)
+l_avr = a + b + c - min(a, b, c) - max(a, b, c)
+l_max = max(a, b, c)
+
+if l_min <= min(d, e) and l_avr <= max(d, e):
+    print('YES')
+else:
+    print('NO')
