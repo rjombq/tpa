@@ -1,0 +1,17 @@
+a = int(input())
+b = int(input())
+n = int(input())
+m = int(input())
+ta_max = n*1 + a*(n+1)
+ta_min = n*1 + a*(n-1)
+tb_max = m*1 + b*(m+1)
+tb_min = m*1 + b*(m-1)
+T=[]
+for i in range(ta_min, ta_max+1):
+    for j in range(tb_min, tb_max+1):
+        if i == j and i not in T:
+            T.append(i)
+if len(T) == 0:
+    print(-1)
+else:
+    print(min(T), max(T))
