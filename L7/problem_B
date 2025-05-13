@@ -1,0 +1,24 @@
+n, m = map(int, input().split())
+objects = []
+for i in range(n):
+    a, b = map(int, input().split())
+    objects.append((min(a, b), -1))
+    objects.append((max(a, b), 1))
+ms = [int(x) for x in input().split()]
+for m in ms:
+    objects.append((m, 0))
+objects.sort()
+status = 0
+minfo = {}
+for k in range(len(objects)):
+    if objects[k][1] == -1:
+        status += 1
+    if objects[k][1] == 1:
+        status -= 1
+    if objects[k][1] == 0:
+        minfo[objects[k][0]] = status
+ans = []
+for h in ms:
+    ans.append(minfo[h])
+print(*ans)
+
