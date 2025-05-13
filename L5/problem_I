@@ -1,0 +1,15 @@
+def robot(k, operations):
+    prevlen = 0
+    ans = 0
+    for i in range(k, len(operations)):
+        if operations[i] == operations[i-k]:
+            prevlen += 1
+            ans += prevlen
+        else:
+            prevlen = 0
+    return ans
+
+
+k = int(input())
+opr = [x for x in input()]
+print(robot(k, opr))
