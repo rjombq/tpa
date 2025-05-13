@@ -1,0 +1,22 @@
+setsize = 100
+myset = [[] for _ in range(setsize)]
+
+
+def add(x):
+    myset[x % setsize].append(x)
+
+
+def find(x):
+    for now in myset[x % setsize]:
+        if now == x:
+            return True
+    return False
+
+
+ans = 0
+A = [int(t) for t in input().split()]
+for i in A:
+    if find(i) is False:
+        add(i)
+        ans += 1
+print(ans)
