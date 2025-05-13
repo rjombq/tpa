@@ -1,0 +1,39 @@
+n = int(input())
+events = []
+for i in range(n):
+    inm, outm = map(int, input().split())
+    if outm - inm < 5:
+        continue
+    events.append((inm, -1, i))
+    events.append((outm - 5, 1, i))
+events.sort()
+if len(events) == 0:
+    print(0, 10, 20)
+elif len(events) == 2:
+    print(1, events[0][0], events[0][0] + 10)
+else:
+    maxcnt = 0
+    vid1, vid2 = 0, 0
+    ad1 = set()
+    for j in range(len(events)):
+        event1 = events[j]
+        if event1[1] == -1:
+            ad1.add(event1[2])
+            if len(ad1) > maxcnt:
+                maxcnt = len(ad1)
+                vid1 = event1[0]
+                vid2 = event1[0] + 5
+        ad2cnt = 0
+        for k in range(j+1, len(events)):
+            event2 = events[k]
+            if event2[1] == -1 and event2[2] not in ad1:
+                ad2cnt += 1
+            if event2[0] - 5 >= event1[0] and len(ad1) + ad2cnt > maxcnt:
+                maxcnt = len(ad1) + ad2cnt
+                vid1 = event1[0]
+                vid2 = event2[0]
+            if event2[1] == 1 and event2[2] not in ad1:
+                ad2cnt -= 1
+        if event1[1] == 1:
+            ad1.remove(event1[2])
+    print(maxcnt, vid1, vid2)
