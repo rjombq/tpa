@@ -1,0 +1,34 @@
+def checklen(l, params):
+    n, k, L = params
+    cnt = 0
+    for i in L:
+        cnt += i // l
+    return cnt >= k
+
+
+def lbinsearch(l, r, check, checkparams):
+    while l < r:
+        m = (l + r) // 2
+        if check(m, checkparams):
+            r = m
+        else:
+            l = m + 1
+    return l
+
+
+def rbinsearch(l, r, check, checkparams):
+    while l < r:
+        m = (l + r + 1) // 2
+        if check(m, checkparams):
+            l = m
+        else:
+            r = m - 1
+    return l
+
+
+L = []
+n, k = map(int, input().split())
+for i in range(n):
+    L.append(int(input()))
+len = rbinsearch(0, max(L), checklen, (n, k, L))
+print(len)
