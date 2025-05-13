@@ -1,0 +1,30 @@
+def checkmark(amountfive, params):
+    a, b, c = params
+    return amountfive*5 + a*2 + b*3 + c*4 >= 3.5 * (a + b + c + amountfive)
+
+
+
+def lbinsearch(l, r, check, checkparams):
+    while l < r:
+        m = (l + r) // 2
+        if check(m, checkparams):
+            r = m
+        else:
+            l = m + 1
+    return l
+
+
+def rbinsearch(l, r, check, checkparams):
+    while l < r:
+        m = (l + r + 1) // 2
+        if check(m, checkparams):
+            l = m
+        else:
+            r = m - 1
+    return l
+
+
+a = int(input())
+b = int(input())
+c = int(input())
+print(lbinsearch(0, a+b+c, checkmark, (a, b, c)))
