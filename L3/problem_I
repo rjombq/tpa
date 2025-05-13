@@ -1,0 +1,18 @@
+n = int(input())
+studs = []
+for i in range(n):
+    m = int(input())
+    stud = set()
+    for j in range(m):
+        lang = input()
+        stud.add(lang)
+    studs.append(stud)
+ans2 = studs[0]
+ans1 = studs[0]
+for s in studs[1:]:
+    ans2 = s | ans2
+    ans1 = s & ans1
+print(len(ans1))
+print(*ans1, sep='\n')
+print(len(ans2))
+print(*ans2, sep='\n')
