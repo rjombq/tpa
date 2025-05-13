@@ -1,0 +1,8 @@
+n = int(input())
+top = set()
+for i in range(n):
+    a, b = map(int, input().split())
+    if a + b + 1 != n or a < 0 or b < 0:
+        continue
+    top.add(n-b)
+print(len(top))
