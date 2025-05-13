@@ -1,0 +1,25 @@
+def checklen1(size, params):
+    a, b, n, w, h = params
+    cnt = (max(w, h) // (max(a, b)+2*size)) * (min(w, h) // (min(a, b) + 2*size))
+    return cnt >= n and cnt * a * b <= w*h
+
+
+def checklen2(size, params):
+    a, b, n, w, h = params
+    cnt = (min(w, h) // (max(a, b) + 2 * size)) * (max(w, h) // (min(a, b) + 2 * size))
+    return cnt >= n and cnt * a * b <= w * h
+
+
+def rbinsearch(l, r, check, checkparams):
+    while l < r:
+        m = (l + r + 1) // 2
+        if check(m, checkparams):
+            l = m
+        else:
+            r = m - 1
+    return l
+
+
+n, a, b, w, h = map(int, input().split())
+d = max(rbinsearch(0, min(w, h), checklen1, (a, b, n, w, h)), rbinsearch(0, min(w, h), checklen2, (a, b, n, w, h)))
+print(d)
