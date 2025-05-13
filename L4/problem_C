@@ -1,0 +1,18 @@
+def count_words(s):
+    words = sorted(s.split())
+    count = {}
+    maxcount = 0
+    for word in words:
+        if word not in count:
+            count[word] = 0
+        count[word] += 1
+        if count[word] > maxcount:
+            maxcount = count[word]
+    for word in words:
+        if count[word] == maxcount:
+            return word
+
+
+file = open('input.txt', 'r')
+text = file.read()
+print(count_words(text))
