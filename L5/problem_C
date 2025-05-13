@@ -1,0 +1,31 @@
+def H_prefix(coord, n):
+    delta_height_prefix1 = [0]*n
+    delta_height_prefix2 = [0]*n
+    for i in range(1, n):
+        dh = coord[i][1] - coord[i-1][1]
+        if dh > 0:
+            delta_height_prefix1[i] = delta_height_prefix1[i-1] + dh
+            delta_height_prefix2[i] = delta_height_prefix2[i - 1]
+        else:
+            delta_height_prefix2[i] = delta_height_prefix2[i-1] - dh
+            delta_height_prefix1[i] = delta_height_prefix1[i - 1]
+    return delta_height_prefix1, delta_height_prefix2
+
+
+x_y = []
+N = int(input())
+for j in range(N):
+    x, y = map(int, input().split())
+    x_y.append([x, y])
+M = int(input())
+ways = []
+for k in range(M):
+    s, f = map(int, input().split())
+    ways.append([s, f])
+hpref1, hpref2 = H_prefix(x_y, N)
+for s, f in ways:
+    delta_h = 0
+    if s <= f:
+        print(hpref1[f-1] - hpref1[s-1])
+    else:
+        print(hpref2[s-1] - hpref2[f-1])
