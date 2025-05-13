@@ -1,0 +1,23 @@
+def saper(n, m, coord):
+    field = []
+    for y in range(n+2):
+        field.append([0]*(m+2))
+    for p, q in coord:
+        for i in range(p-1, p+2):
+            for k in range(q-1, q+2):
+                field[i][k] += 1
+    for p, q in coord:
+        field[p][q] = '*'
+    return field
+
+
+N, M, K = map(int, input().split())
+PQ = []
+for i in range(K):
+    pq = input()
+    PQ.append([int(x) for x in pq.split()])
+field = saper(N, M, PQ)
+for l in range(1, N+1):
+    for t in range(1, M+1):
+        print(field[l][t], end = ' ')
+    print()
