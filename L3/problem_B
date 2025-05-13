@@ -1,0 +1,25 @@
+setsize = 100000
+myset = [[] for _ in range(setsize)]
+
+
+def add(x):
+    myset[x % setsize].append(x)
+
+
+def find(x):
+    for now in myset[x % setsize]:
+        if now == x:
+            return True
+    return False
+
+
+ans = []
+A = [int(t) for t in input().split()]
+B = [int(m) for m in input().split()]
+for i in A:
+    if find(i) is False:
+        add(i)
+for j in B:
+    if find(j) is True:
+        ans.append(j)
+print(*sorted(ans))
