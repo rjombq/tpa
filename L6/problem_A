@@ -1,0 +1,17 @@
+def lbinsearch(r, l, s, el):
+    while l < r:
+        m = (l + r) // 2
+        if s[m] >= el:
+            r = m
+        else:
+            l = m + 1
+    if s[l] != el:
+        return 'NO'
+    return 'YES'
+
+
+n, k = map(int, input().split())
+mas1 = [int(x) for x in input().split()]
+mas2 = [int(x) for x in input().split()]
+for i in mas2:
+    print(lbinsearch(n-1, 0, mas1, i))
