@@ -1,0 +1,37 @@
+n, m = map(int, input().split())
+now = [0]*(n+1)
+bln = [0]*(n+1)
+events = []
+for i in range(m):
+    f, x, g, y = map(str, input().split())
+    x = int(x[:2])*60 + int(x[3:])
+    y = int(y[:2])*60 + int(y[3:])
+    f, g = int(f), int(g)
+    bln[f] -= 1
+    bln[g] += 1
+    if x > y:
+        events.append((0, 1, f))
+        events.append((y, -1, g))
+        events.append((x, 1, f))
+        events.append((1440, -1, g))
+    else:
+        events.append((x, 1, f))
+        events.append((y, -1, g))
+cnt = 0
+events.sort()
+for t, e_type, city in events:
+    if e_type == -1:
+        now[city] += 1
+    if e_type == 1:
+        if now[city] == 0:
+            cnt += 1
+        else:
+            now[city] -= 1
+flag = True
+for k in bln:
+    if k != 0:
+        flag = False
+if flag:
+    print(cnt)
+else:
+    print(-1)
