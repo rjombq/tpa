@@ -1,0 +1,23 @@
+def maxmult(seq):
+    max1 = max(seq[0], seq[1])
+    max2 = min(seq[0], seq[1])
+    min1 = max2
+    min2 = max1
+    for i in range(2, len(seq)):
+        if seq[i] >= max1:
+            max2 = max1
+            max1 = seq[i]
+        if max2 < seq[i] < max1:
+            max2 = seq[i]
+        if seq[i] <= min1:
+            min2 = min1
+            min1 = seq[i]
+        if min1 < seq[i] < min2:
+            min2 = seq[i]
+    if max1*max2 > min1*min2:
+        return max2, max1
+    else:
+        return min1, min2
+
+
+print(*maxmult([int(x) for x in input().split()]))
