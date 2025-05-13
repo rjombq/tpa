@@ -1,0 +1,13 @@
+def calc(x, y, z, n):
+    xyz = set()
+    xyz.add(x)
+    xyz.add(y)
+    xyz.add(z)
+    if xyz == set(n):
+        return 0
+    return len(set(n) - xyz)
+
+
+X, Y, Z = map(str, input().split())
+N = input()
+print(calc(X, Y, Z, N))
