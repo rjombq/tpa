@@ -1,0 +1,20 @@
+def keyboard(prs, que, n):
+    ans = ['NO']*(n+1)
+    now = {}
+    crit = {}
+    for k in range(1, n+1):
+        crit[k] = prs[k-1]
+    for button in que:
+        if button not in now:
+            now[button] = 0
+        now[button] += 1
+        if now[button] > crit[button]:
+            ans[button] = 'YES'
+    return ans[1:]
+
+
+N = int(input())
+brk = [int(c) for c in input().split()]
+K = int(input())
+queue = [int(p) for p in input().split()]
+print(*keyboard(brk, queue, N), sep='\n')
