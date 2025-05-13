@@ -1,0 +1,39 @@
+N = int(input())
+accents = {}
+for _ in range(N):
+    word = input()
+    for i in range(len(word)):
+        if word[i].isupper():
+            if word.lower() not in accents:
+                accents[word.lower()] = list()
+            accents[word.lower()].append(i)
+s = input().split()
+falses = 0
+for W in s:
+    flag = False
+    if W.lower() in accents:
+        count = 0
+        for let in range(len(W)):
+            if W[let].isupper():
+                count += 1
+                if let in accents[W.lower()]:
+                    flag = True
+                else:
+                    flag = False
+                    break
+        if count > 1:
+            flag = False
+        if flag is False:
+            falses += 1
+    else:
+        if len(W) == 1:
+            if W.islower():
+                falses += 1
+        else:
+            cnt = 0
+            for let in range(len(W)):
+                if W[let].isupper():
+                    cnt += 1
+            if cnt == 0 or cnt > 1:
+                falses += 1
+print(falses)
