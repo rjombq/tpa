@@ -1,0 +1,28 @@
+def alley(trees, n, k):
+    l = 0
+    min_len = n
+    r_last = n - 1
+    l_last = 0
+    count = {}
+    for r in range(n):
+        if trees[r] in count:
+            count[trees[r]] += 1
+        else:
+            count[trees[r]] = 1
+
+        while count[trees[l]] > 1:
+            count[trees[l]] -= 1
+            l += 1
+
+        if len(count) == k:
+            nowlen = r - l + 1
+            if nowlen < min_len:
+                min_len = nowlen
+                r_last = r
+                l_last = l
+    return l_last+1, r_last+1
+
+
+n, k = map(int, input().split())
+trees = [int(x) for x in input().split()]
+print(*alley(trees, n, k))
