@@ -1,0 +1,29 @@
+from datetime import datetime
+n = int(input())
+events = []
+start = datetime(1, 1, 1)
+for i in range(n):
+    born_day, born_month, born_year, death_day, death_month, death_year = map(int, input().split())
+    born = (datetime(born_year, born_month, born_day) - start).days
+    death = (datetime(death_year, death_month, death_day) - start).days
+    active = (datetime(born_year + 18, born_month, born_day) - start).days
+    if death > active:
+        event1 = (datetime(born_year + 18, born_month, born_day) - start).days
+        event2 = min(death, (datetime(born_year + 80, born_month, born_day) - start).days)
+        events.append((event1, 1, i+1))
+        events.append((event2, -1, i+1))
+events.sort()
+contemps = []
+updated = False
+if len(events) == 0:
+    print(0)
+else:
+    for _, type_e, i_man in events:
+        if type_e == 1:
+            contemps.append(i_man)
+            updated = True
+        elif type_e == -1:
+            if updated:
+                print(*sorted(contemps))
+                updated = False
+            contemps.remove(i_man)
