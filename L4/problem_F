@@ -1,0 +1,22 @@
+def shop_stat(info):
+    names = {}
+    for line in info:
+        name, product, quantity = map(str, line.split())
+        if name not in names:
+            names[name] = {}
+        if product not in names[name]:
+            names[name][product] = 0
+        names[name][product] += int(quantity)
+    names = dict(sorted(names.items()))
+    for p in names:
+        names[p] = dict(sorted(names[p].items()))
+    for Client in names:
+        print(Client + ':')
+        for prdct in names[Client]:
+            print(prdct, names[Client][prdct])
+
+
+file = open('input.txt', 'r')
+Info = file.readlines()
+shop_stat(Info)
+file.close()
