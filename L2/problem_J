@@ -1,0 +1,23 @@
+def triangle(info, m):
+    left = 30
+    right = 4000
+    f = float(info[0][0])
+    for t in info[1:]:
+        f_now = float(t[0])
+        if abs(f - f_now) < 10**(-6) or f == f_now:
+            continue
+        result = t[1]
+        sr = (f_now + f)/2
+        if (result == 'closer' and f_now > f) or (result == 'further' and f_now < f):
+                left = max(sr, left)
+        else:
+                right = min(sr, right)
+        f = f_now
+    return left, right
+
+
+n = int(input())
+Info = []
+for i in range(n):
+    Info.append([x for x in input().split()])
+print(*triangle(Info, n))
