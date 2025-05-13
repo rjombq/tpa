@@ -1,0 +1,33 @@
+n = int(input())
+events = []
+for i in range(n):
+    hopen, mopen, hclose, mclose = map(int, input().split())
+    timeopen, timeclose = hopen * 60 + mopen, hclose * 60 + mclose
+    if timeclose < timeopen:
+        events.append((0, -1))
+        events.append((timeclose, 1))
+        events.append((timeopen, -1))
+        events.append((1440, 1))
+    elif timeclose == timeopen:
+        if timeopen == 0:
+            events.append((0, -1))
+            events.append((1440, 1))
+        else:
+            events.append((0, -1))
+            events.append((timeopen, 1))
+            events.append((timeopen, -1))
+            events.append((1440, 1))
+    else:
+        events.append((timeopen, -1))
+        events.append((timeclose, 1))
+events.sort()
+cnt = 0
+ans = 0
+for j in range(len(events)):
+    if cnt == n:
+        ans += events[j][0] - events[j-1][0]
+    if events[j][1] == -1:
+        cnt += 1
+    if events[j][1] == 1:
+        cnt -= 1
+print(ans)
