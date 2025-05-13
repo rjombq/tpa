@@ -1,0 +1,30 @@
+n, d = map(int, input().split())
+coord = [int(x) for x in input().split()]
+obj = []
+for x in coord:
+    obj.append((x+d, 1))
+    obj.append((x, -1))
+variants = {}
+cnt = 0
+maxcnt = 0
+nowvar = 1
+obj.sort()
+for j in range(len(obj)):
+    if obj[j][1] == -1:
+        cnt += 1
+        if cnt > maxcnt:
+            maxcnt = cnt
+    else:
+        cnt -= 1
+for k in range(len(obj)):
+    if obj[k][1] == -1:
+        variants[obj[k][0]] = nowvar
+        if nowvar < maxcnt:
+            nowvar += 1
+        else:
+            nowvar = 1
+ans = []
+for x in coord:
+    ans.append(variants[x])
+print(max(ans))
+print(*ans)
