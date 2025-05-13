@@ -1,0 +1,29 @@
+def checkcomfort(x, params):
+    n, r, c, hs = params
+    hs.sort()
+    cnt = 0
+    now = 0
+    while now < len(hs) - c + 1:
+        if hs[now+c-1] - hs[now] <= x:
+            cnt += 1
+            now += c
+        else:
+            now += 1
+    return cnt >= r
+
+
+def lbinsearch(l, r, check, checkparams):
+    while l < r:
+        m = (l + r) // 2
+        if check(m, checkparams):
+            r = m
+        else:
+            l = m + 1
+    return l
+
+
+heights = []
+n, r, c = map(int, input().split())
+for i in range(n):
+    heights.append(int(input()))
+print(lbinsearch(0, max(heights) - min(heights), checkcomfort, (n, r, c, heights)))
