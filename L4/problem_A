@@ -1,0 +1,10 @@
+def synonym(dictionary, word):
+    return dictionary[word]
+
+
+dict = {}
+n = int(input())
+for i in range(n):
+    word1, word2 = map(str, input().split())
+    dict[word1], dict[word2] = word2, word1
+print(synonym(dict, input()))
