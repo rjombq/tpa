@@ -1,0 +1,13 @@
+N = int(input())
+proportions = {}
+for i in range(N):
+    w, h = map(int, input().split())
+    if w in proportions:
+        if h > proportions[w]:
+            proportions[w] = h
+    else:
+        proportions[w] = h
+H = 0
+for k in proportions:
+    H += proportions[k]
+print(H)
