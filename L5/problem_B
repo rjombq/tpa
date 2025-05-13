@@ -1,0 +1,28 @@
+def makeprefix(cars, n):
+    prefixsum = [0]*(n+1)
+    for i in range(1, n+1):
+        prefixsum[i] = prefixsum[i-1] + cars[i-1]
+    return prefixsum
+
+
+def findcars(prefixsums, k):
+    L = 0
+    R = 1
+    cnt = 0
+    while L < len(prefixsums) and R < len(prefixsums):
+        sum = prefixsums[R] - prefixsums[L]
+        if sum < k:
+            R += 1
+        elif sum > k:
+            L += 1
+        else:
+            cnt += 1
+            R += 1
+            L += 1
+    return cnt
+
+
+N, K = map(int, input().split())
+Cars = [int(x) for x in input().split()]
+prefixsumo = makeprefix(Cars, N)
+print(findcars(prefixsumo, K))
