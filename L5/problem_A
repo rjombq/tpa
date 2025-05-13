@@ -1,0 +1,25 @@
+def stilist(s_c, p_c, N, M):
+    nowshirt = 0
+    nowpants = 0
+    best = abs(s_c[0] - p_c[0])
+    bestshirt = 0
+    bestpants = 0
+    while nowshirt != N and nowpants != M:
+        now = s_c[nowshirt] - p_c[nowpants]
+        if abs(now) < best:
+            best = abs(now)
+            bestshirt, bestpants = nowshirt, nowpants
+        if now > 0:
+            nowpants += 1
+        elif now < 0:
+            nowshirt += 1
+        else:
+            return s_c[nowshirt], p_c[nowpants]
+    return s_c[bestshirt], p_c[bestpants]
+
+
+n = int(input())
+shirts_colors = [int(x) for x in input().split()]
+m = int(input())
+pants_colors = [int(x) for x in input().split()]
+print(*stilist(shirts_colors, pants_colors, n, m))
