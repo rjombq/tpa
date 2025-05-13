@@ -1,0 +1,17 @@
+def condition(classes, models, n, m):
+    cost = 0
+    nowmodel = 0
+    for school_class in classes:
+        while school_class > models[nowmodel][0]:
+            nowmodel += 1
+        cost += models[nowmodel][1]
+    return cost
+
+
+n = int(input())
+classes = [int(x) for x in input().split()]
+m = int(input())
+models = [tuple(map(int, input().split())) for _ in range(m)]
+classes.sort()
+models.sort(key=lambda t: t[1])
+print(condition(classes, models, n, m))
