@@ -1,0 +1,17 @@
+def checktime(time, params):
+    N, x, y = params
+    k = time // min(x, y) + (time - min(x, y)) // max(x, y)
+    return k >= N
+
+def lbinsearch(l, r, check, checkparams):
+    while l < r:
+        m = (l + r) // 2
+        if check(m, checkparams):
+            r = m
+        else:
+            l = m + 1
+    return l
+
+
+N, x, y = map(int, input().split())
+print(lbinsearch(0, max(x, y) * N, checktime, (N, x, y)))
