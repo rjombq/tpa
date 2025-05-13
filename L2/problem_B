@@ -1,0 +1,36 @@
+def rowtype(S):
+    ans = 'RANDOM'
+    if len(S) == 1:
+        ans = 'CONSTANT'
+    else:
+        lstn = S[0]
+        const, asc, des = [0]*3
+        for i in S[1:]:
+            if i == lstn:
+                const += 1
+            if i > lstn:
+                asc += 1
+            if i < lstn:
+                des += 1
+            lstn = i
+        l = len(S) - 1
+        if asc == l:
+            ans = 'ASCENDING'
+        elif des == l:
+            ans = 'DESCENDING'
+        elif const == l:
+            ans = 'CONSTANT'
+        else:
+            if asc + const == l:
+                ans = 'WEAKLY ASCENDING'
+            elif des + const == l:
+                ans = 'WEAKLY DESCENDING'
+    return ans
+
+
+n = int(input())
+A = []
+while n != -2*10**9:
+    A.append(n)
+    n = int(input())
+print(rowtype(A))
