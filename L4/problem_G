@@ -1,0 +1,49 @@
+accounts = {}
+
+
+def deposit(name, sum):
+    if name not in accounts:
+        accounts[name] = 0
+    accounts[name] += sum
+def withdraw(name, sum):
+    if name not in accounts:
+        accounts[name] = 0
+    accounts[name] -= sum
+def balance(name):
+    if name not in accounts:
+        print('ERROR')
+    else:
+        print(accounts[name])
+def transit(name1, name2, sum):
+    if name1 not in accounts:
+        accounts[name1] = 0
+    if name2 not in accounts:
+        accounts[name2] = 0
+    accounts[name1] -= sum
+    accounts[name2] += sum
+def income(p):
+    for name in accounts:
+        if accounts[name] > 0:
+            accounts[name] = accounts[name]*(100+p)//100
+
+
+file = open('input.txt', 'r')
+operations = file.readlines()
+for line in operations:
+    line = line.split()
+    operation = line[0]
+    if operation == 'DEPOSIT':
+        Name, Sum = line[1], int(line[2])
+        deposit(Name, Sum)
+    if operation == 'WITHDRAW':
+        Name, Sum = line[1], int(line[2])
+        withdraw(Name, Sum)
+    if operation == 'TRANSFER':
+        Name1, Name2, Sum = line[1], line[2], int(line[3])
+        transit(Name1, Name2, Sum)
+    if operation == 'BALANCE':
+        Name = line[1]
+        balance(Name)
+    if operation == 'INCOME':
+        P = int(line[1])
+        income(P)
