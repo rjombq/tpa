@@ -1,0 +1,16 @@
+def count_words(s):
+    words = s.split()
+    count = {}
+    ans = []
+    for word in words:
+        if word not in count:
+            count[word] = 0
+        ans.append(count[word])
+        count[word] += 1
+    return ans
+
+
+file = open('input.txt', 'r')
+text = file.read()
+print(*count_words(text))
+file.close()
