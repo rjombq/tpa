@@ -1,0 +1,32 @@
+k = int(input())
+for g in range(k):
+    n, *m = [int(x) for x in input().split()]
+    security = [0]*(n*2)
+    for k in range(0, n*2, 2):
+        security[k] = ([m[k], -1, k])
+        security[k+1] = ([m[k+1], 1, k])
+    security.sort()
+    now = set()
+    goods = set()
+    flag = True
+    ltime = -1
+    for t, type, num in security:
+        if t != 0 and len(now) == 0:
+            flag = False
+            break
+
+        if len(now) == 1 and t != ltime:
+            goods.update(now)
+
+        if type == 1:
+            now.remove(num)
+        if type == -1:
+            now.add(num)
+
+        ltime = t
+    if ltime != 10000:
+        flag = False
+    if flag is True and len(goods) == len(security)//2:
+        print('Accepted')
+    else:
+        print('Wrong Answer')
